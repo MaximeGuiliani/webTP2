@@ -1,0 +1,22 @@
+{
+  "name": "etudiantserver",
+  "version": "1.0.0",
+  "description": "Server to store students informations",
+  "main": "server/server.js",
+  "scripts": {
+    "build": "babel server/ -d dist && rm -rf dist/app && cp -r app/ dist/",
+    "start": "npm run build && node dist/server.js",
+    "inspect": "node --inspect dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maxime Guiliani maxime.guiliani@etu.univamu.fr",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.17.3",
+    "@babel/core": "^7.17.4",
+    "@babel/preset-env": "^7.16.11"
+  },
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
