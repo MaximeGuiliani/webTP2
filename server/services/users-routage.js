@@ -31,4 +31,6 @@ usersRouter.get('/', usersHandler.getUsers);
 usersRouter.post('/', usersHandler.create);
 usersRouter.get('/', asyncHandler(usersHandler.getUsers));
 usersRouter.post('/', asyncHandler(usersHandler.create));
+usersRouter.delete('/:id', asyncHandler(usersHandler.userDelete));
+
 export default usersRouter;
