@@ -1,5 +1,7 @@
 import express from 'express';
-const router = express.Router();
+import usersHandler from './users-handler';
+import asyncHandler from 'express-async-handler';
+const usersRouter = express.Router();
 let users = [{
     firstName: 'Maxime',
     lastName: 'Guiliani',
@@ -8,9 +10,11 @@ let users = [{
     options: ['web application', 'basket']
 }];
 
-
-
-router.post('/', function (req, res) {
+usersRouter.get('/', asyncHandler(usersHandler.getUsers));
+usersRouter.post('/', asyncHandler(usersHandler.create));
+usersRouter.get('/', usersHandler.getUsers);
+usersRouter.post('/', usersHandler.create);
+usersRouter.post('/', function (req, res) {
     const userExist = users.find(user => user.firstName === req.body.firstName);
 
     if (userExist) {
@@ -22,7 +26,7 @@ router.post('/', function (req, res) {
         });
     }
 })
-router.get('/', function (req, res) {
+usersRouter.get('/', function (req, res) {
     res.send(users);
 
 
@@ -30,4 +34,4 @@ router.get('/', function (req, res) {
 })
 
 
-export default router;
+export default usersRouter;
