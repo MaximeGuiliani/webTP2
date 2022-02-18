@@ -22,10 +22,6 @@ let users = [{
   diploma: 'License 3 Informatique',
   options: ['web application', 'basket']
 }];
-usersRouter.get('/', (0, _expressAsyncHandler.default)(_usersHandler.default.getUsers));
-usersRouter.post('/', (0, _expressAsyncHandler.default)(_usersHandler.default.create));
-usersRouter.get('/', _usersHandler.default.getUsers);
-usersRouter.post('/', _usersHandler.default.create);
 usersRouter.post('/', function (req, res) {
   const userExist = users.find(user => user.firstName === req.body.firstName);
 
@@ -41,5 +37,9 @@ usersRouter.post('/', function (req, res) {
 usersRouter.get('/', function (req, res) {
   res.send(users);
 });
+usersRouter.get('/', _usersHandler.default.getUsers);
+usersRouter.post('/', _usersHandler.default.create);
+usersRouter.get('/', (0, _expressAsyncHandler.default)(_usersHandler.default.getUsers));
+usersRouter.post('/', (0, _expressAsyncHandler.default)(_usersHandler.default.create));
 var _default = usersRouter;
 exports.default = _default;

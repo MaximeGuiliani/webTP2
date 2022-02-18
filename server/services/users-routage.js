@@ -10,10 +10,8 @@ let users = [{
     options: ['web application', 'basket']
 }];
 
-usersRouter.get('/', asyncHandler(usersHandler.getUsers));
-usersRouter.post('/', asyncHandler(usersHandler.create));
-usersRouter.get('/', usersHandler.getUsers);
-usersRouter.post('/', usersHandler.create);
+
+
 usersRouter.post('/', function (req, res) {
     const userExist = users.find(user => user.firstName === req.body.firstName);
 
@@ -28,10 +26,9 @@ usersRouter.post('/', function (req, res) {
 })
 usersRouter.get('/', function (req, res) {
     res.send(users);
-
-
-
 })
-
-
+usersRouter.get('/', usersHandler.getUsers);
+usersRouter.post('/', usersHandler.create);
+usersRouter.get('/', asyncHandler(usersHandler.getUsers));
+usersRouter.post('/', asyncHandler(usersHandler.create));
 export default usersRouter;
