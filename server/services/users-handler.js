@@ -22,13 +22,14 @@ async function create(req, res) {
             res.send({});
         } else {
             await usersRep.store(req.body);
-            res.send(firstName = 'ok');
+            res.send({
+                firstName = 'ok'
+            });
         }
     } catch (e) {
         res.status(400).end();
     }
 }
-
 
 async function userExist(firstName) {
     try {
@@ -58,4 +59,5 @@ export default {
     getUsers,
     create,
     userExist,
+    userDelete,
 };

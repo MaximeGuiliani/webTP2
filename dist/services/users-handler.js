@@ -34,8 +34,7 @@ async function create(req, res) {
       res.send({});
     } else {
       await _usersRepository.default.store(req.body);
-      res.send( // NOTE peut etre {firstName}
-      firstName = 'ok');
+      res.send(firstName = 'ok');
     }
   } catch (e) {
     res.status(400).end();
@@ -52,9 +51,25 @@ async function userExist(firstName) {
   }
 }
 
+async function userDelete(req, res) {
+  try {
+    const userBool = await userExist(req.params.id);
+
+    if (!userBool) {
+      res.status(404).end();
+    } else {
+      const result = await _usersRepository.default.remove(req.params.id);
+      res.send(result);
+    }
+  } catch (e) {
+    res.status(error.status || 400).end();
+  }
+}
+
 var _default = {
   getUsers,
   create,
-  userExist
+  userExist,
+  userDelete
 };
 exports.default = _default;
