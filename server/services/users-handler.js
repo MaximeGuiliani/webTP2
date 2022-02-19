@@ -22,9 +22,9 @@ async function create(req, res) {
             res.send({});
         } else {
             await usersRep.store(req.body);
-            res.send({
+            res.send(
                 firstName = 'ok'
-            });
+            );
         }
     } catch (e) {
         res.status(400).end();
