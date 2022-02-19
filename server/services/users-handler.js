@@ -33,6 +33,7 @@ async function create(req, res) {
 
 async function userExist(firstName) {
     try {
+        // TODO : ERROR here
         const result = await usersRep.getUser(firstName);
         return result.body.hits.total.value > 0 ? true : false;
     } catch (e) {
@@ -43,6 +44,7 @@ async function userExist(firstName) {
 
 async function userDelete(req, res) {
     try {
+        console.log(req.params.id)
         const userBool = await userExist(req.params.id);
         if (!userBool) {
             res.status(404).end();

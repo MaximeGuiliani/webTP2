@@ -14,7 +14,7 @@ async function getUsers(req, res) {
     const result = await _usersRepository.default.getAll();
     const finalArray = [];
 
-    for (let obj of result.body.hits.hits) {
+    for (let obj of res.body.hits.hits) {
       finalArray.push(obj.source);
     }
 
@@ -43,8 +43,9 @@ async function create(req, res) {
 
 async function userExist(firstName) {
   try {
+    // TODO : ERROR here
     const result = await _usersRepository.default.getUser(firstName);
-    return result.body.hits.total.value > 0 ? true : false;
+    return res.body.hits.total.value > 0 ? true : false;
   } catch (e) {
     console.log('error getting user', e);
     return false;
@@ -53,6 +54,7 @@ async function userExist(firstName) {
 
 async function userDelete(req, res) {
   try {
+    console.log(req.params.id);
     const userBool = await userExist(req.params.id);
 
     if (!userBool) {

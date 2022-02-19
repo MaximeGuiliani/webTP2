@@ -1,3 +1,6 @@
+import {
+    response
+} from 'express';
 import esClient from './es-client';
 
 const index = 'local_users';
@@ -19,6 +22,7 @@ const store = user => esClient.index({
     index,
     refresh: 'true',
     body: user,
+    //  TODO : error response.status
 }).then(response => response.status).catch((error) => {
     handleElasticsearchError(error);
 });
@@ -61,4 +65,5 @@ export default {
     getUser,
     store,
     getAll,
+    remove,
 };

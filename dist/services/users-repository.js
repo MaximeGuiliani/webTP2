@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _express = require("express");
+
 var _esClient = _interopRequireDefault(require("./es-client"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -28,8 +30,9 @@ const getAll = () => _esClient.default.search({
 const store = user => _esClient.default.index({
   index,
   refresh: 'true',
-  body: user
-}).then(response => response.status).catch(error => {
+  body: user //  TODO : error response.status
+
+}).then(response => response).catch(error => {
   handleElasticsearchError(error);
 });
 
@@ -69,6 +72,7 @@ const remove = firstName => _esClient.default.deleteByQuery({
 var _default = {
   getUser,
   store,
-  getAll
+  getAll,
+  remove
 };
 exports.default = _default;
